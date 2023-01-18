@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/bbayszczak/gitlab-cicd-exporter/configuration"
 	"go.uber.org/zap"
 )
 
@@ -16,4 +17,5 @@ func main() {
 	sugaredLogger := logger.Sugar()
 
 	sugaredLogger.Info("starting gitlab-cicd-exporter")
+	configuration.GetConfiguration(sugaredLogger)
 }
