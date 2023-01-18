@@ -1,21 +1,19 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/bbayszczak/gitlab-cicd-exporter/configuration"
+	"github.com/bbayszczak/gitlab-cicd-exporter/logging"
 	"go.uber.org/zap"
 )
 
 func main() {
-	logger, err := zap.NewProduction()
-	if err != nil {
-		panic(fmt.Sprintf("Cannot init logger: %s", err))
-	}
+	logger, loggerAtomLvl := logging.InitLogger()
+
 	defer logger.Sync()
 	zap.ReplaceGlobals(logger)
 	sugaredLogger := logger.Sugar()
 
 	sugaredLogger.Info("starting gitlab-cicd-exporter")
-	configuration.GetConfiguration(sugaredLogger)
+	config := configuration.GetConfiguration(sugaredLogger)
+	logging.SetLogLevel(sugaredLogger, loggerAtomLvl, config.LogLevel)
 }
