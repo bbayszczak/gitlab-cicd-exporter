@@ -24,7 +24,7 @@ func NewMetrics() *Metrics {
 			Name:        "pipelines_started_count",
 			Description: "Count of pipelines started",
 			Type:        "counter_vec",
-			Args:        []string{"project"},
+			Args:        []string{"project", "source", "ref"},
 		},
 	}
 }

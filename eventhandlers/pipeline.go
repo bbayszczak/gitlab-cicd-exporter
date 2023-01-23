@@ -9,7 +9,11 @@ import (
 
 func PipelineEvent(event *gitlab.PipelineEvent, logger *zap.SugaredLogger, cc *customcontext.CustomContext) error {
 	if event.ObjectAttributes.Status == "running" {
-		metrics.CounterIncrease(cc.Metrics.PipelinesStartedCount, map[string]string{"project": event.Project.PathWithNamespace})
+		metrics.CounterIncrease(cc.Metrics.PipelinesStartedCount, map[string]string{
+			"project": event.Project.PathWithNamespace,
+			"source":  event.ObjectAttributes.Source,
+			"ref":     event.ObjectAttributes.Ref,
+		})
 	}
 	return nil
 }
