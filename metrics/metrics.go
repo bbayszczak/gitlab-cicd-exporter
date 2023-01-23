@@ -2,6 +2,7 @@ package metrics
 
 import (
 	echoprom "github.com/labstack/echo-contrib/prometheus"
+	"github.com/prometheus/client_golang/prometheus"
 )
 
 type Metrics struct {
@@ -26,4 +27,8 @@ func NewMetrics() *Metrics {
 			Args:        []string{"project"},
 		},
 	}
+}
+
+func CounterIncrease(metric *echoprom.Metric, labels map[string]string) {
+	metric.MetricCollector.(*prometheus.CounterVec).With(labels).Inc()
 }

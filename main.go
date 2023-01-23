@@ -27,8 +27,8 @@ func main() {
 	metrics := metrics.NewMetrics()
 	e := echo.New()
 	e.HideBanner = true
-	p := echoprom.NewPrometheus("echo", nil, metrics.MetricList())
-	p.Use(e)
+	promCustom := echoprom.NewPrometheus("gitlab_cicd", nil, metrics.MetricList())
+	promCustom.Use(e)
 	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 			cc := &customcontext.CustomContext{
