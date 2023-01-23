@@ -43,5 +43,10 @@ func main() {
 	e.Use(middleware.RequestID())
 	e.Use(logging.ZapLogger(logger))
 	e.GET("/health", api.Health)
+	e.POST("/webhook", api.Webhook, middleware.KeyAuthWithConfig(middleware.KeyAuthConfig{
+		KeyLookup:  "header:X-Gitlab-Token",
+		AuthScheme: "",
+		Validator:  api.GitlabAuth,
+	}))
 	e.Logger.Fatal(e.Start(":8080"))
 }
