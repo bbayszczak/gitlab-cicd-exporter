@@ -8,12 +8,14 @@ import (
 type Metrics struct {
 	PipelinesStartedCount *echoprom.Metric
 	PipelinesDuration     *echoprom.Metric
+	JobsDuration          *echoprom.Metric
 }
 
 func (m *Metrics) MetricList() []*echoprom.Metric {
 	return []*echoprom.Metric{
 		m.PipelinesStartedCount,
 		m.PipelinesDuration,
+		m.JobsDuration,
 	}
 }
 
@@ -33,6 +35,13 @@ func NewMetrics() *Metrics {
 			Type:        "histogram_vec",
 			Args:        []string{"project", "source", "ref", "status"},
 			Buckets:     prometheus.LinearBuckets(30, 30, 40),
+		},
+		JobsDuration: &echoprom.Metric{
+			Name:        "jobs_duration_seconds",
+			Description: "jobs duration in seconds",
+			Type:        "histogram_vec",
+			Args:        []string{"project", "name", "ref", "status", "runner_tags"},
+			Buckets:     prometheus.ExponentialBuckets(5, 1.19, 30),
 		},
 	}
 }

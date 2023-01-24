@@ -15,3 +15,4 @@ A Prometheus / OpenMetrics exporter for Gitlab CI/CD
 |----------------------------------------|-----------|--------------------------------|
 | gitlab_cicd_pipelines_started_count    | counter   | the count of pipelines started |
 | gitlab_cicd_pipelines_duration_seconds | histogram | pipelines duration in seconds  |
+| jobs_duration_seconds                  | histogram | jobs duration in seconds       |
