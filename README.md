@@ -2,6 +2,8 @@
 
 A Prometheus / OpenMetrics exporter for Gitlab CI/CD
 
+This exporter is made to help to improve GitlabCI pipelines performance
+
 ## configuration
 
 | environment variable              | default value | possible values               | description                      |
