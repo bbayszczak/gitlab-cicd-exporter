@@ -11,6 +11,7 @@ A Prometheus / OpenMetrics exporter for Gitlab CI/CD
 
 ## metrics list
 
-| metric name                         | type    | description                      |
-|-------------------------------------|---------|----------------------------------|
-| gitlab_cicd_pipelines_started_count | counter | the counter of pipelines started |
+| metric name                            | type      | description                    |
+|----------------------------------------|-----------|--------------------------------|
+| gitlab_cicd_pipelines_started_count    | counter   | the count of pipelines started |
+| gitlab_cicd_pipelines_duration_seconds | histogram | pipelines duration in seconds  |

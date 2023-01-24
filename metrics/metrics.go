@@ -7,12 +7,13 @@ import (
 
 type Metrics struct {
 	PipelinesStartedCount *echoprom.Metric
-	PipelinesEndedCount   *echoprom.Metric
+	PipelinesDuration     *echoprom.Metric
 }
 
 func (m *Metrics) MetricList() []*echoprom.Metric {
 	return []*echoprom.Metric{
 		m.PipelinesStartedCount,
+		m.PipelinesDuration,
 	}
 }
 
@@ -26,9 +27,20 @@ func NewMetrics() *Metrics {
 			Type:        "counter_vec",
 			Args:        []string{"project", "source", "ref"},
 		},
+		PipelinesDuration: &echoprom.Metric{
+			Name:        "pipelines_duration_seconds",
+			Description: "Pipelines duration in seconds",
+			Type:        "histogram_vec",
+			Args:        []string{"project", "source", "ref", "status"},
+			Buckets:     prometheus.LinearBuckets(30, 30, 40),
+		},
 	}
 }
 
 func CounterIncrease(metric *echoprom.Metric, labels map[string]string) {
 	metric.MetricCollector.(*prometheus.CounterVec).With(labels).Inc()
+}
+
+func HistogramObserve(metric *echoprom.Metric, observedValue float64, labels map[string]string) {
+	metric.MetricCollector.(*prometheus.HistogramVec).With(labels).Observe(observedValue)
 }
