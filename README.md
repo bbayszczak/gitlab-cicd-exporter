@@ -6,6 +6,19 @@ This exporter is made to help to improve GitlabCI pipelines performance
 
 It`s only using Gitlab webhooks and do not contact Gitlab API to avoid rate limiting issues
 
+## table of content
+
+- [gitlab-cicd-exporter](#gitlab-cicd-exporter)
+  - [table of content](#table-of-content)
+  - [configuration](#configuration)
+  - [metrics list](#metrics-list)
+  - [how to use](#how-to-use)
+    - [run gitlab-cicd-exporter](#run-gitlab-cicd-exporter)
+      - [Docker (recommended)](#docker-recommended)
+      - [from source code](#from-source-code)
+      - [Helm chart](#helm-chart)
+    - [Gitlab setup](#gitlab-setup)
+
 ## configuration
 
 | environment variable              | default value | possible values               | description                      |
