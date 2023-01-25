@@ -32,7 +32,7 @@ It`s only using Gitlab webhooks and do not contact Gitlab API to avoid rate limi
 |----------------------------------------|-----------|--------------------------------|
 | gitlab_cicd_pipelines_started_count    | counter   | the count of pipelines started |
 | gitlab_cicd_pipelines_duration_seconds | histogram | pipelines duration in seconds  |
-| jobs_duration_seconds                  | histogram | jobs duration in seconds       |
+| gitlab_cicd_jobs_duration_seconds      | histogram | jobs duration in seconds       |
 
 ## how to use
 
